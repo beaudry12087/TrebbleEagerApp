@@ -1,0 +1,73 @@
+{
+  "resources": {
+    "head": [
+      {
+        "type": "script",
+        "src": "./eagerTrebbleWidgetInstallHelper.js"
+      }
+    ]
+  },
+  "options": {
+
+          "properties": {
+            "trebbleId": {
+              "title": "URL",
+              "type": "string",
+              "description": "The unique identifier of the Trebble to be embedded",
+              "order": 1,
+              "default": ""
+            },
+            "location": {
+              "title": "Location",
+              "type": "object",
+              "format": "element",
+              "description": "Select where on the page would you like the Trebble widget to appear",
+              "order": 2
+            },
+             "widthFitContainer": {
+			      "title": "Width Fit Container",
+  				   "type": "boolean",
+  				   "default": true,
+  				   "order": 3
+			},
+			"customWidth": {
+			      "title": "Custom Wdith",
+  				   "type": "integer",
+  				   "default": 300,
+  				   "minimum": 200,
+  				   "order": 4,
+  				   "description": "Enter the width of the trebble widget in pixel",
+  				   "showIf": {
+				        "widthFitContainer": false
+				    }
+			},
+			 "heightFitContainer": {
+			      "title": "Height Fit Container",
+  				   "type": "boolean",
+  				   "default": false,
+  				   "order": 5
+			},
+			"customHeight": {
+			      "title": "Custom Height",
+  				   "type": "integer",
+  				   "default": 400,
+  				   "minimum": 150,
+  				   "order": 6,
+  				   "description": "Enter the height of the trebble widget in pixel",
+  				   "showIf": {
+				        "heightFitContainer": false
+				    }
+			}
+          }
+    
+  },
+  "preview": {
+  "handlers": [
+    {
+      "options": ["trebbleId", "widthFitContainer","customWidth","heightFitContainer","customHeight"],
+      "reload": false,
+      "execute": "EagerAddTrebbleWiget.setOptions(INSTALL_OPTIONS)"
+    }
+  ]
+}
+}
