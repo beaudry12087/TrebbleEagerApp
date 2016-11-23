@@ -30,10 +30,22 @@
               "enumNames": {
                 "BeforeThePage": "Before the page content",
                 "AfterThePage": "After the page content",
-                "ChooseYourOwn": "Choose your own"
+                "ChooseYourOwn": "Choose your own ..."
               }
 
               },
+            "alwaysVisibible": {
+            "title": "Always Visible",
+             "type": "boolean",
+             "default": true,
+             "order": 4,
+             "showIf": {
+                "whereToAppend": {
+                  "op": "!=",
+                  "value": "ChooseYourOwn"
+                }
+              }
+      },
             "location": {
               "default": {
                 "selector": "body",

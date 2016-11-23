@@ -64,6 +64,7 @@
 
   var getLocation = function(options){
       var customLocation = options.whereToAppend == "ChooseYourOwn";
+      var alwaysVisibible = options.alwaysVisibible;
       if(customLocation){
         return Eager.createElement(options.location);
       }else{
@@ -73,9 +74,24 @@
         }else{
           l.method = "append";
         }
-        return Eager.createElement(l);
+
+        var newEagerAppEl =  Eager.createElement(l);
+        if(alwaysVisibible){
+          if(l.method == "append"){
+            document.body.style["padding-bottom"] = "60px";
+            newEagerAppEl.style["bottom"] = "0px";
+          }else{
+            document.body.style["padding-top"] = "60px";
+            newEagerAppEl.style["top"] = "0px";
+          }
+          newEagerAppEl.style["position"] = "fixed";
+          newEagerAppEl.style["width"] = "100%";
+          newEagerAppEl.style["height"] = "60px";
+          newEagerAppEl.style["z-index"] = "999999999";
+        }
+        return newEagerAppEl;
       }
-      return customLocation?Eager.createElement(options.location): document.body;
+      //return customLocation?Eager.createElement(options.location): document.body;
   }
 
   var extractTrebbleIdFromUrl = function(urlOrTrebbleId){
@@ -109,10 +125,10 @@
       var trebbleEmbedUrl = getTrebbleWidgetUrl(options);
 
       
-      var el = getLocation(options)
+     /* var el = getLocation(options)
       if(!el){
         return;
-      }
+      }*/
 
       var widgetWidth = getWidth(options);
       var widgetHeight = getHeight(options);
