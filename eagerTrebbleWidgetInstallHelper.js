@@ -32,30 +32,64 @@
   var options = INSTALL_OPTIONS;
 
   var getWidth = function(options){
-    if(options.widthFitContainer){
-      return "100%";
-    }else{
-      if(options.customWidth){
-          return options.customWidth +"px";
+    if(options.whereToAppend == "ChooseYourOwn"){
+      if(options.widthFitContainer){
+        return "100%";
+      }else{
+        if(options.customWidth){
+            return options.customWidth +"px";
+        }
       }
+      return null;
+    }else{
+      return "100%";
     }
-    return null;
     
   }
 
   var getHeight = function(options){
-    if(options.heightFitContainer){
-      return "100%";
-    }else{
-      if(options.customHeight){
-          return options.customHeight +"px";
+    if(options.whereToAppend == "ChooseYourOwn"){
+      if(options.heightFitContainer){
+        return "100%";
+      }else{
+        if(options.customHeight){
+            return options.customHeight +"px";
+        }
       }
+      return null;
+    }else{
+      return "60px";
     }
-    return null;
+  }
+
+  var getLocation = function(options){
+      var customLocation = options.whereToAppend == "ChooseYourOwn";
+      if(customLocation){
+        return Eager.createElement(options.location);
+      }else{
+        var l =  {"selector": "body"};
+        if(options.whereToAppend == "BeforeThePage"){
+          l.method = "prepend";
+        }else{
+          l.method = "append";
+        }
+        return Eager.createElement(l);
+      }
+      return customLocation?Eager.createElement(options.location): document.body;
+  }
+
+  var extractTrebbleIdFromUrl = function(urlOrTrebbleId){
+    if(urlOrTrebbleId && urlOrTrebbleId.indexOf("//web.trebble.fm") != -1){
+        var decodeURL = decodeURIComponent(urlOrTrebbleId);
+        return decodeURL.substr(decodeURL.lastIndexOf('/') + 1);
+    }else{
+      return urlOrTrebbleId;
+    }
+
   }
 
   var getTrebbleWidgetUrl = function(options){
-    var trebbleId = options.trebbleId;
+    var trebbleId = extractTrebbleIdFromUrl(options.trebbleId);
     if(trebbleId){
       var TREBBLE_EMBED_URL_PREFIX = "https://web.trebble.fm/trebble_embedded_optimized.html#p/l/t/";
       return TREBBLE_EMBED_URL_PREFIX + trebbleId;
@@ -75,8 +109,7 @@
       var trebbleEmbedUrl = getTrebbleWidgetUrl(options);
 
       
-
-      var el = Eager.createElement(options.location);
+      var el = getLocation(options)
       if(!el){
         return;
       }
@@ -88,14 +121,11 @@
         return;
       }
       var initializeAndAddTrebbleWidget = function(newOptions, newWidgetWidth, newWidgetHeight, newTrebbleEmbedUrl){
-        var el = Eager.createElement(options.location);
-         console.error("AAAAAAAAA");
+        var el = getLocation(options);
         if(el && newOptions && newWidgetWidth && newWidgetHeight){
           window.EagerAddTrebbleWiget.currentTrebbleWidgetUrl =  trebbleEmbedUrl;
           el.innerHTML = '<iframe type="text/html" style="max-width: 100%;" width="'+ newWidgetWidth +'" height="'+ newWidgetHeight +'" src="' + newTrebbleEmbedUrl + '" frameborder="0" allowtransparency="true"/>';
-          console.error(el.children.length);
           window.EagerAddTrebbleWiget.trebbleWidgetIframe = el.children.length > 0 ? el.children[0]: null;
-          console.error(window.EagerAddTrebbleWiget.trebbleWidgetIframe);
         }
       };
 
@@ -105,8 +135,6 @@
          var newWidgetWidth = getWidth(newOptions);
           var newWidgetHeight = getHeight(newOptions);
           var newTrebbleEmbedUrl = getTrebbleWidgetUrl(newOptions);
-          console.error("EEEEEEEE");
-           console.error(window.EagerAddTrebbleWiget.trebbleWidgetIframe);
         if(window.EagerAddTrebbleWiget.trebbleWidgetIframe){
           if(newWidgetWidth){
             window.EagerAddTrebbleWiget.trebbleWidgetIframe.width = newWidgetWidth;

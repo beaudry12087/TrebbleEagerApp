@@ -11,51 +11,83 @@
 
           "properties": {
             "trebbleId": {
-              "title": "URL",
+              "title": "Trebble URL",
               "type": "string",
-              "description": "The unique identifier of the Trebble to be embedded",
+              "description": "The unique identifier of the Trebble to be embedded.",
               "order": 1,
               "default": ""
             },
-            "location": {
+            "whereToAppend" :{
+              "default": "BeforeThePage",
               "title": "Location",
+              "type": "string",
+              "order": 2,
+              "enum": [
+                "BeforeThePage",
+                "AfterThePage",
+                "ChooseYourOwn"
+              ],
+              "enumNames": {
+                "BeforeThePage": "Before the page content",
+                "AfterThePage": "After the page content",
+                "ChooseYourOwn": "Choose your own"
+              }
+
+              },
+            "location": {
+              "default": {
+                "selector": "body",
+                "method": "prepend"
+              },
+              "title": "Choose your own location",
               "type": "object",
               "format": "element",
-              "description": "Select where on the page would you like the Trebble widget to appear",
-              "order": 2
+              "description": "Select where on the page would you like the Trebble widget to appear.",
+              "order": 3,
+              "showIf": {
+                "whereToAppend": "ChooseYourOwn"
+              }
             },
              "widthFitContainer": {
-			      "title": "Width Fit Container",
+			      "title": "Expand horizontally",
   				   "type": "boolean",
   				   "default": true,
-  				   "order": 3
+  				   "order": 4,
+             "showIf": {
+                "whereToAppend": "ChooseYourOwn"
+              }
 			},
 			"customWidth": {
-			      "title": "Custom Wdith",
+			      "title": "Custom Width",
   				   "type": "integer",
   				   "default": 300,
   				   "minimum": 200,
-  				   "order": 4,
-  				   "description": "Enter the width of the trebble widget in pixel",
+  				   "order": 5,
+  				   "description": "Enter the width of the trebble widget in pixel.",
   				   "showIf": {
-				        "widthFitContainer": false
+				        "widthFitContainer": false,
+                "whereToAppend": "ChooseYourOwn"
 				    }
 			},
 			 "heightFitContainer": {
-			      "title": "Height Fit Container",
+			      "title": "Expand vertically",
   				   "type": "boolean",
   				   "default": false,
-  				   "order": 5
+  				   "order": 6,
+             "showIf": {
+                "whereToAppend": "ChooseYourOwn"
+              }
 			},
 			"customHeight": {
 			      "title": "Custom Height",
   				   "type": "integer",
   				   "default": 400,
   				   "minimum": 150,
-  				   "order": 6,
-  				   "description": "Enter the height of the trebble widget in pixel",
+  				   "order": 7,
+  				   "description": "Enter the height of the trebble widget in pixel.",
   				   "showIf": {
-				        "heightFitContainer": false
+				        "heightFitContainer": false,
+                "whereToAppend": "ChooseYourOwn"
 				    }
 			}
           }
