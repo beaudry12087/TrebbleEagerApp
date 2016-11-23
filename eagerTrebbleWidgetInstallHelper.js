@@ -88,6 +88,12 @@
           newEagerAppEl.style["width"] = "100%";
           newEagerAppEl.style["height"] = "60px";
           newEagerAppEl.style["z-index"] = "999999999";
+        }else{
+          if(!customLocation){
+            newEagerAppEl.style["width"] = "100%";
+            newEagerAppEl.style["height"] = "60px";
+            newEagerAppEl.style["display"] = "block";
+          }
         }
         return newEagerAppEl;
       }
