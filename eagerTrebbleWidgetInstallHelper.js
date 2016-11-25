@@ -88,6 +88,7 @@
           newEagerAppEl.style["width"] = "100%";
           newEagerAppEl.style["height"] = "60px";
           newEagerAppEl.style["z-index"] = "999999999";
+          newEagerAppEl.style["box-shadow"] = "0 8px 20px -9px rgba(0, 0, 0, 0.3)";
         }else{
           if(!customLocation){
             newEagerAppEl.style["width"] = "100%";
