@@ -80,15 +80,16 @@
           if(l.method == "append"){
             document.body.style["padding-bottom"] = "60px";
             newEagerAppEl.style["bottom"] = "0px";
+            newEagerAppEl.style["box-shadow"] = "0px -9px 20px -5px rgba(0, 0, 0, 0.3)";
           }else{
             document.body.style["padding-top"] = "60px";
             newEagerAppEl.style["top"] = "0px";
+            newEagerAppEl.style["box-shadow"] = "0 8px 20px -9px rgba(0, 0, 0, 0.3)";
           }
           newEagerAppEl.style["position"] = "fixed";
           newEagerAppEl.style["width"] = "100%";
           newEagerAppEl.style["height"] = "60px";
           newEagerAppEl.style["z-index"] = "999999999";
-          newEagerAppEl.style["box-shadow"] = "0 8px 20px -9px rgba(0, 0, 0, 0.3)";
         }else{
           if(!customLocation){
             newEagerAppEl.style["width"] = "100%";
@@ -102,7 +103,7 @@
   }
 
   var extractTrebbleIdFromUrl = function(urlOrTrebbleId){
-    if(urlOrTrebbleId && urlOrTrebbleId.indexOf("//web.trebble.fm") != -1){
+    if(urlOrTrebbleId && (urlOrTrebbleId.indexOf("//web.trebble.fm") != -1 || urlOrTrebbleId.indexOf("//s.trebble.fm") != -1)){
         var decodeURL = decodeURIComponent(urlOrTrebbleId);
         return decodeURL.substr(decodeURL.lastIndexOf('/') + 1);
     }else{
