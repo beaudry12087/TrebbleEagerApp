@@ -3,115 +3,111 @@
     "head": [
       {
         "type": "script",
-        "src": "./eagerTrebbleWidgetInstallHelper.js"
+        "src": "./source/app.js"
       }
     ]
   },
   "options": {
-
-          "properties": {
-            "trebbleId": {
-              "title": "Trebble URL",
-              "type": "string",
-              "description": "The unique identifier of the Trebble to be embedded.",
-              "order": 1,
-              "default": ""
-            },
-            "whereToAppend" :{
-              "default": "BeforeThePage",
-              "title": "Location",
-              "type": "string",
-              "order": 2,
-              "enum": [
-                "BeforeThePage",
-                "AfterThePage",
-                "ChooseYourOwn"
-              ],
-              "enumNames": {
-                "BeforeThePage": "Before the page content",
-                "AfterThePage": "After the page content",
-                "ChooseYourOwn": "Choose your own location ..."
-              }
-
-              },
-            "alwaysVisibible": {
-            "title": "Always Visible",
-             "type": "boolean",
-             "default": true,
-             "order": 4,
-             "showIf": {
-                "whereToAppend": {
-                  "op": "!=",
-                  "value": "ChooseYourOwn"
-                }
-              }
-      },
-            "location": {
-              "default": {
-                "selector": "body",
-                "method": "prepend"
-              },
-              "title": "Choose your own location",
-              "type": "object",
-              "format": "element",
-              "description": "Select where on the page would you like the Trebble widget to appear.",
-              "order": 3,
-              "showIf": {
-                "whereToAppend": "ChooseYourOwn"
-              }
-            },
-             "widthFitContainer": {
-			      "title": "Expand horizontally",
-  				   "type": "boolean",
-  				   "default": true,
-  				   "order": 4,
-             "showIf": {
-                "whereToAppend": "ChooseYourOwn"
-              }
-			},
-			"customWidth": {
-			      "title": "Custom Width",
-  				   "type": "integer",
-  				   "default": 300,
-  				   "minimum": 200,
-  				   "order": 5,
-  				   "description": "Enter the width of the trebble widget in pixel.",
-  				   "showIf": {
-				        "widthFitContainer": false,
-                "whereToAppend": "ChooseYourOwn"
-				    }
-			},
-			 "heightFitContainer": {
-			      "title": "Expand vertically",
-  				   "type": "boolean",
-  				   "default": false,
-  				   "order": 6,
-             "showIf": {
-                "whereToAppend": "ChooseYourOwn"
-              }
-			},
-			"customHeight": {
-			      "title": "Custom Height",
-  				   "type": "integer",
-  				   "default": 400,
-  				   "minimum": 150,
-  				   "order": 7,
-  				   "description": "Enter the height of the trebble widget in pixel.",
-  				   "showIf": {
-				        "heightFitContainer": false,
-                "whereToAppend": "ChooseYourOwn"
-				    }
-			}
+    "properties": {
+      "alwaysVisible": {
+        "default": true,
+        "order": 4,
+        "showIf": {
+          "whereToAppend": {
+            "op": "!=",
+            "value": "ChooseYourOwn"
           }
-    
+        },
+        "title": "Always Visible",
+        "type": "boolean"
+      },
+      "customHeight": {
+        "default": 400,
+        "description": "Enter the height of the trebble widget in pixel.",
+        "minimum": 150,
+        "order": 7,
+        "showIf": {
+          "heightFitContainer": false,
+          "whereToAppend": "ChooseYourOwn"
+        },
+        "title": "Custom Height",
+        "type": "integer"
+      },
+      "customWidth": {
+        "default": 300,
+        "description": "Enter the width of the trebble widget in pixel.",
+        "minimum": 200,
+        "order": 5,
+        "showIf": {
+          "whereToAppend": "ChooseYourOwn",
+          "widthFitContainer": false
+        },
+        "title": "Custom Width",
+        "type": "integer"
+      },
+      "heightFitContainer": {
+        "default": false,
+        "order": 6,
+        "showIf": {
+          "whereToAppend": "ChooseYourOwn"
+        },
+        "title": "Expand vertically",
+        "type": "boolean"
+      },
+      "location": {
+        "default": {
+          "method": "prepend",
+          "selector": "body"
+        },
+        "description": "Select where on the page would you like the Trebble widget to appear.",
+        "format": "element",
+        "order": 3,
+        "showIf": {
+          "whereToAppend": "ChooseYourOwn"
+        },
+        "title": "Choose your own location",
+        "type": "object"
+      },
+      "trebbleId": {
+        "default": "",
+        "description": "The unique identifier of the Trebble to be embedded.",
+        "order": 1,
+        "title": "Trebble URL",
+        "type": "string"
+      },
+      "whereToAppend": {
+        "default": "AfterThePage",
+        "enum": [
+          "BeforeThePage",
+          "AfterThePage",
+          "ChooseYourOwn"
+        ],
+        "enumNames": {
+          "AfterThePage": "After the page content",
+          "BeforeThePage": "Before the page content",
+          "ChooseYourOwn": "Choose your own location ..."
+        },
+        "order": 2,
+        "title": "Location",
+        "type": "string"
+      },
+      "widthFitContainer": {
+        "default": true,
+        "order": 4,
+        "showIf": {
+          "whereToAppend": "ChooseYourOwn"
+        },
+        "title": "Expand horizontally",
+        "type": "boolean"
+      }
+    }
   },
   "preview": {
-  "handlers": [
-    {
-      "options": ["trebbleId", "widthFitContainer","customWidth","heightFitContainer","customHeight"],
-      "reload": false,
-      "execute": "EagerAddTrebbleWiget.setOptions(INSTALL_OPTIONS)"
-    }
-  ]
-}
+    "handlers": [
+      {
+        "options": ["*"],
+        "execute": "INSTALL_SCOPE.setOptions(INSTALL_OPTIONS)"
+      }
+    ]
+  }
 }
