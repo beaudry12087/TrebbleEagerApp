@@ -35,7 +35,7 @@
       return
     }
 
-    var location = {'selector': 'body'}
+    var location = {selector: 'body'}
 
     if (options.whereToAppend === 'BeforeThePage') {
       location.method = 'prepend'
