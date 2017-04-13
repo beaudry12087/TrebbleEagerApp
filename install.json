@@ -15,7 +15,7 @@
         "default": ""
       },
       "whereToAppend": {
-        "default": "BeforeThePage",
+        "default": "AfterThePage",
         "title": "Location",
         "type": "string",
         "order": 2,
@@ -87,6 +87,7 @@
           "whereToAppend": "ChooseYourOwn"
         }
       },
+      
       "customHeight": {
         "title": "Custom Height",
         "type": "integer",
@@ -104,7 +105,7 @@
       "handlers": [{
         "options": ["trebbleId", "widthFitContainer", "customWidth", "heightFitContainer", "customHeight"],
         "reload": false,
-        "execute": "window.INSTALL_SCOPE.setOptions(INSTALL_OPTIONS)"
+        "execute": "INSTALL_SCOPE.setOptions(INSTALL_OPTIONS)"
       }]
     }
   }

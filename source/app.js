@@ -89,8 +89,9 @@
 
       var isEmbeddedInCloudflareapps = function(){
         var iframeParentUrl = (window.location != window.parent.location)? document.referrer:null;
+        console.error("isEmbeddedInCloudflareapps "+ iframeParentUrl);
         if(iframeParentUrl){
-          return iframeParentUrl.indexOf("cloudflareapps.com") != -1;
+          return iframeParentUrl.indexOf("cloudflare.com") != -1;
         }
         return false;
       }
@@ -147,6 +148,7 @@
 
     };
 
+
     function addElement() {
       window.INSTALL_SCOPE.trebbleWidgetIframe  = null;
       window.INSTALL_SCOPE.currentTrebbleWidgetUrl = null;
@@ -162,10 +164,9 @@
 
     };
 
-
+  
 
     if(!inIframe() || isEmbeddedInCloudflareapps()){
-
       if (document.readyState == 'loading'){
         document.addEventListener('DOMContentLoaded', addElement);
       }else{
