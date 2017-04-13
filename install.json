@@ -1,117 +1,111 @@
 {
   "resources": {
-    "head": [
-      {
-        "type": "script",
-        "src": "./eagerTrebbleWidgetInstallHelper.js"
-      }
-    ]
+    "head": [{
+      "type": "script",
+      "src": "./source/app.js"
+    }]
   },
   "options": {
-
-          "properties": {
-            "trebbleId": {
-              "title": "Trebble URL",
-              "type": "string",
-              "description": "The unique identifier of the Trebble to be embedded.",
-              "order": 1,
-              "default": ""
-            },
-            "whereToAppend" :{
-              "default": "BeforeThePage",
-              "title": "Location",
-              "type": "string",
-              "order": 2,
-              "enum": [
-                "BeforeThePage",
-                "AfterThePage",
-                "ChooseYourOwn"
-              ],
-              "enumNames": {
-                "BeforeThePage": "Before the page content",
-                "AfterThePage": "After the page content",
-                "ChooseYourOwn": "Choose your own location ..."
-              }
-
-              },
-            "alwaysVisibible": {
-            "title": "Always Visible",
-             "type": "boolean",
-             "default": true,
-             "order": 4,
-             "showIf": {
-                "whereToAppend": {
-                  "op": "!=",
-                  "value": "ChooseYourOwn"
-                }
-              }
+    "properties": {
+      "trebbleId": {
+        "title": "Trebble URL",
+        "type": "string",
+        "description": "The unique identifier of the Trebble to be embedded.",
+        "order": 1,
+        "default": ""
       },
-            "location": {
-              "default": {
-                "selector": "body",
-                "method": "prepend"
-              },
-              "title": "Choose your own location",
-              "type": "object",
-              "format": "element",
-              "description": "Select where on the page would you like the Trebble widget to appear.",
-              "order": 3,
-              "showIf": {
-                "whereToAppend": "ChooseYourOwn"
-              }
-            },
-             "widthFitContainer": {
-			      "title": "Expand horizontally",
-  				   "type": "boolean",
-  				   "default": true,
-  				   "order": 4,
-             "showIf": {
-                "whereToAppend": "ChooseYourOwn"
-              }
-			},
-			"customWidth": {
-			      "title": "Custom Width",
-  				   "type": "integer",
-  				   "default": 300,
-  				   "minimum": 200,
-  				   "order": 5,
-  				   "description": "Enter the width of the trebble widget in pixel.",
-  				   "showIf": {
-				        "widthFitContainer": false,
-                "whereToAppend": "ChooseYourOwn"
-				    }
-			},
-			 "heightFitContainer": {
-			      "title": "Expand vertically",
-  				   "type": "boolean",
-  				   "default": false,
-  				   "order": 6,
-             "showIf": {
-                "whereToAppend": "ChooseYourOwn"
-              }
-			},
-			"customHeight": {
-			      "title": "Custom Height",
-  				   "type": "integer",
-  				   "default": 400,
-  				   "minimum": 150,
-  				   "order": 7,
-  				   "description": "Enter the height of the trebble widget in pixel.",
-  				   "showIf": {
-				        "heightFitContainer": false,
-                "whereToAppend": "ChooseYourOwn"
-				    }
-			}
+      "whereToAppend": {
+        "default": "BeforeThePage",
+        "title": "Location",
+        "type": "string",
+        "order": 2,
+        "enum": [
+          "BeforeThePage",
+          "AfterThePage",
+          "ChooseYourOwn"
+        ],
+        "enumNames": {
+          "BeforeThePage": "Before the page content",
+          "AfterThePage": "After the page content",
+          "ChooseYourOwn": "Choose your own location ..."
+        }
+
+      },
+      "alwaysVisibible": {
+        "title": "Always Visible",
+        "type": "boolean",
+        "default": true,
+        "order": 4,
+        "showIf": {
+          "whereToAppend": {
+            "op": "!=",
+            "value": "ChooseYourOwn"
           }
-    
-  },
-  "preview": {
-  "handlers": [
-    {
-      "options": ["trebbleId", "widthFitContainer","customWidth","heightFitContainer","customHeight"],
-      "reload": false,
-      "execute": "EagerAddTrebbleWiget.setOptions(INSTALL_OPTIONS)"
+        }
+      },
+      "location": {
+        "default": {
+          "selector": "body",
+          "method": "prepend"
+        },
+        "title": "Choose your own location",
+        "type": "object",
+        "format": "element",
+        "description": "Select where on the page would you like the Trebble widget to appear.",
+        "order": 3,
+        "showIf": {
+          "whereToAppend": "ChooseYourOwn"
+        }
+      },
+      "widthFitContainer": {
+        "title": "Expand horizontally",
+        "type": "boolean",
+        "default": true,
+        "order": 4,
+        "showIf": {
+          "whereToAppend": "ChooseYourOwn"
+        }
+      },
+      "customWidth": {
+        "title": "Custom Width",
+        "type": "integer",
+        "default": 300,
+        "minimum": 200,
+        "order": 5,
+        "description": "Enter the width of the trebble widget in pixel.",
+        "showIf": {
+          "widthFitContainer": false,
+          "whereToAppend": "ChooseYourOwn"
+        }
+      },
+      "heightFitContainer": {
+        "title": "Expand vertically",
+        "type": "boolean",
+        "default": false,
+        "order": 6,
+        "showIf": {
+          "whereToAppend": "ChooseYourOwn"
+        }
+      },
+      "customHeight": {
+        "title": "Custom Height",
+        "type": "integer",
+        "default": 400,
+        "minimum": 150,
+        "order": 7,
+        "description": "Enter the height of the trebble widget in pixel.",
+        "showIf": {
+          "heightFitContainer": false,
+          "whereToAppend": "ChooseYourOwn"
+        }
+      }
+    },
+    "preview": {
+      "handlers": [{
+        "options": ["trebbleId", "widthFitContainer", "customWidth", "heightFitContainer", "customHeight"],
+        "reload": false,
+        "execute": "window.INSTALL_SCOPE.setOptions(INSTALL_OPTIONS)"
+      }]
     }
-  ]
-}
+  }
 }
