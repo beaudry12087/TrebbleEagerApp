@@ -97,12 +97,12 @@
       }
 
       var getTrebbleWidgetUrl = function(){
-        var trebbleId = extractTrebbleIdFromUrl(options.trebbleId);
+        var trebbleId = (options.myTrebbleToEmbed && options.myTrebbleToEmbed != "chooseAnotherTrebbleToEmbed")?options.myTrebbleToEmbed : extractTrebbleIdFromUrl(options.trebbleId);
         if(trebbleId){
           var TREBBLE_EMBED_URL_PREFIX = "https://web.trebble.fm/trebble_embedded_optimized.html#p/l/t/";
-          return TREBBLE_EMBED_URL_PREFIX + trebbleId +"/r/" + APP_CONTEXT;
+          return TREBBLE_EMBED_URL_PREFIX + trebbleId +"/r/" + APP_CONTEXT;    
         }else{
-          return "https://web.trebble.fm/TrebbleWidgetEmptyPlaceholder.html";
+          return "https://web.trebble.fm/trebble_embedded_optimized.html#p/l/t/58ebe9a9227fe2000c015dc7/r/" + APP_CONTEXT;
         }
       }
 
@@ -165,7 +165,7 @@
     };
 
   
-
+debugger;
     if(!inIframe() || isEmbeddedInCloudflareapps()){
       if (document.readyState == 'loading'){
         document.addEventListener('DOMContentLoaded', addElement);
