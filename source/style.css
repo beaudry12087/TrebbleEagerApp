@@ -1,0 +1,33 @@
+cloudflare-app[demotrebble=true]::before{
+	content: 'Demo Preview';
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color: #7062cf;
+	background:
+	-webkit-linear-gradient(45deg, hsla(298, 98%, 44%, 1) 0%, hsla(298, 98%, 44%, 0) 70%),
+	-webkit-linear-gradient(315deg, hsla(224, 97%, 46%, 1) 10%, hsla(224, 97%, 46%, 0) 80%),
+	-webkit-linear-gradient(225deg, hsla(217, 99%, 46%, 1) 10%, hsla(217, 99%, 46%, 0) 80%),
+	-webkit-linear-gradient(135deg, hsla(323, 95%, 42%, 1) 100%, hsla(323, 95%, 42%, 0) 70%);
+	background:
+	linear-gradient(45deg, hsla(298, 98%, 44%, 1) 0%, hsla(298, 98%, 44%, 0) 70%),
+	linear-gradient(135deg, hsla(224, 97%, 46%, 1) 10%, hsla(224, 97%, 46%, 0) 80%),
+	linear-gradient(225deg, hsla(217, 99%, 46%, 1) 10%, hsla(217, 99%, 46%, 0) 80%),
+	linear-gradient(315deg, hsla(323, 95%, 42%, 1) 100%, hsla(323, 95%, 42%, 0) 70%);
+	color: white;
+	height: 22px;
+	display: flex;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	justify-content: center;
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+	-ms-justify-content: center;
+	align-items: center;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	-ms-align-items: center;
+	font-size: 12px;
+	padding: 0px 10px;
+}

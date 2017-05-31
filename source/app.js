@@ -36,6 +36,7 @@
         if(customLocation){
 
           element = INSTALL.createElement(options.location, element);
+           element.style["background-color"] = options.widgetPlaceholderBackgroundColor;
           return;
         }
         var location =  {selector: "body"};
@@ -46,6 +47,7 @@
         }
 
         element =  INSTALL.createElement(location);
+        element.style["background-color"] = options.widgetPlaceholderBackgroundColor;
         if(alwaysVisibible){
           if(location.method == "append"){
             document.body.style["padding-bottom"] = "60px";
@@ -89,7 +91,6 @@
 
       var isEmbeddedInCloudflareapps = function(){
         var iframeParentUrl = (window.location != window.parent.location)? document.referrer:null;
-        console.error("isEmbeddedInCloudflareapps "+ iframeParentUrl);
         if(iframeParentUrl){
           return iframeParentUrl.indexOf("cloudflare.com") != -1;
         }
@@ -103,6 +104,15 @@
           return TREBBLE_EMBED_URL_PREFIX + trebbleId +"/r/" + APP_CONTEXT;    
         }else{
           return "https://web.trebble.fm/trebble_embedded_optimized.html#p/l/t/58ebe9a9227fe2000c015dc7/r/" + APP_CONTEXT;
+        }
+      }
+
+      var isTrebbleWidgetUsingDemoURL = function(){
+        var trebbleId = (options.myTrebbleToEmbed && options.myTrebbleToEmbed != "chooseAnotherTrebbleToEmbed")?options.myTrebbleToEmbed : extractTrebbleIdFromUrl(options.trebbleId);
+        if(trebbleId){
+          return false;
+        }else{
+          return true;
         }
       }
 
@@ -121,16 +131,17 @@
         iframe.src = trebbleEmbedUrl;
         element.appendChild(iframe)
         window.INSTALL_SCOPE.trebbleWidgetIframe = element.children.length > 0 ? element.children[0]: null;
+        window.INSTALL_SCOPE.cloudflareContainerElement = element;
       }
     };
 
     //Function to Update embedded trebble widget if the height, the width or the trebble id changes
     function setOptionsOnTrebbleWidget(nextOptions){
-      console.error("Calling setOptionsOnTrebbleWidget");
       options = nextOptions;
       var newWidgetWidth = getWidth();
       var newWidgetHeight = getHeight();
       var newTrebbleEmbedUrl = getTrebbleWidgetUrl();
+      var isUsingDemoTrebble = isTrebbleWidgetUsingDemoURL();
       if(window.INSTALL_SCOPE.trebbleWidgetIframe){
         if(newWidgetWidth){
           window.INSTALL_SCOPE.trebbleWidgetIframe.width = newWidgetWidth;
@@ -145,14 +156,21 @@
       }else{
         createAndAddTrebbleWidgetToPage(newWidgetWidth, newWidgetHeight, newTrebbleEmbedUrl);
       }
+      if(isUsingDemoTrebble){
+        window.INSTALL_SCOPE.cloudflareContainerElement.setAttribute("demoTrebble", "true");
+      }else{
+        window.INSTALL_SCOPE.cloudflareContainerElement.setAttribute("demoTrebble", "false");
+      }
 
     };
 
 
     function addElement() {
       window.INSTALL_SCOPE.trebbleWidgetIframe  = null;
+      window.INSTALL_SCOPE.cloudflareContainerElement = null;
       window.INSTALL_SCOPE.currentTrebbleWidgetUrl = null;
       var trebbleEmbedUrl = getTrebbleWidgetUrl();
+      var isUsingDemoTrebble = isTrebbleWidgetUsingDemoURL();
       var widgetWidth = getWidth();
       var widgetHeight = getHeight();
       if(!widgetWidth || !widgetHeight){
@@ -161,11 +179,16 @@
         
       createAndAddTrebbleWidgetToPage( widgetWidth, widgetHeight, trebbleEmbedUrl);
       window.INSTALL_SCOPE.setOptions  = setOptionsOnTrebbleWidget ;
+      if(isUsingDemoTrebble && window.INSTALL_SCOPE.cloudflareContainerElement){
+        window.INSTALL_SCOPE.cloudflareContainerElement.setAttribute("demoTrebble", "true");
+      }else{
+        window.INSTALL_SCOPE.cloudflareContainerElement.setAttribute("demoTrebble", "false");
+      }
 
     };
 
   
-debugger;
+
     if(!inIframe() || isEmbeddedInCloudflareapps()){
       if (document.readyState == 'loading'){
         document.addEventListener('DOMContentLoaded', addElement);

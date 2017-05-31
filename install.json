@@ -2,6 +2,10 @@
    "resources": {
       "head": [
          {
+           "type": "style",
+           "src": "./source/style.css"
+         },
+         {
             "type": "script",
             "src": "./source/app.js"
          }
@@ -19,6 +23,22 @@
           }
         }
       ],
+       "preview": {
+         "handlers": [
+            {
+               "options": [
+                  "trebbleId",
+                  "trebbleUserId",
+                  "widthFitContainer",
+                  "customWidth",
+                  "heightFitContainer",
+                  "widgetPlaceholderBackgroundColor",
+                  "customHeight"
+               ],
+               "execute": "INSTALL_SCOPE.setOptions(INSTALL_OPTIONS)"
+            }
+         ]
+      },
    "options": {
       "properties": {
          "trebbleUserId": {
@@ -61,6 +81,12 @@
                   "value": null
                }
             }
+         },
+         "widgetPlaceholderBackgroundColor":{
+           "default": "#333",
+           "format": "color",
+           "title": "Widget placeholder background color",
+           "type": "string"
          },
          "whereToAppend": {
             "default": "AfterThePage",
@@ -146,23 +172,8 @@
                "whereToAppend": "ChooseYourOwn"
             }
          }
-      },
-      "preview": {
-         "handlers": [
-            {
-               "options": [
-                  "trebbleId",
-                  "trebbleUserId",
-                  "widthFitContainer",
-                  "customWidth",
-                  "heightFitContainer",
-                  "customHeight"
-               ],
-               "reload": false,
-               "execute": "INSTALL_SCOPE.setOptions(INSTALL_OPTIONS)"
-            }
-         ]
       }
+     
 
   }
 }
