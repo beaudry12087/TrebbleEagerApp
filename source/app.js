@@ -36,6 +36,7 @@
         if(customLocation){
 
           element = INSTALL.createElement(options.location, element);
+          element.style["display"] = "block";
           element.style["background-color"] = options.widgetPlaceholderBackgroundColor;
           return;
         }
@@ -262,11 +263,11 @@
 
 
 
-    if(!inIframe() || isEmbeddedInCloudflareapps()){
-      if (document.readyState == 'loading'){
-        document.addEventListener('DOMContentLoaded', addElement);
-      }else{
-        addElement();
-      }
+    
+    if (document.readyState == 'loading'){
+      document.addEventListener('DOMContentLoaded', addElement);
+    }else{
+      addElement();
     }
+    
   })();
