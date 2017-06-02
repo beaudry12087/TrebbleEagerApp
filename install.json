@@ -1,9 +1,21 @@
 {
    "resources": {
       "head": [
+          {
+           "type": "style",
+           "src": "./source/libs/drop-theme-arrows-bounce-dark.css"
+         },
          {
            "type": "style",
            "src": "./source/style.css"
+         },
+         {
+            "type": "script",
+            "src": "./source/libs/tether.min.js"
+         },
+         {
+            "type": "script",
+            "src": "./source/libs/drop.min.js"
          },
          {
             "type": "script",
@@ -11,6 +23,11 @@
          }
       ]
    },
+   "links" :[{
+                   "itle": "Trebble.fm",
+                   "description": "Visit Trebble.fm to add music and capsules to your Trebble",
+                   "href": "https://web.trebble.fm/#accessCode/M5LL-UPCB-B4E2"
+    }],
          "hooks": [
         {
           "endpoint": "https://s.trebble.fm/hooks/v1/cloudflare/onUserAuthenticated",

@@ -36,7 +36,7 @@
         if(customLocation){
 
           element = INSTALL.createElement(options.location, element);
-           element.style["background-color"] = options.widgetPlaceholderBackgroundColor;
+          element.style["background-color"] = options.widgetPlaceholderBackgroundColor;
           return;
         }
         var location =  {selector: "body"};
@@ -61,7 +61,7 @@
           element.style["position"] = "fixed";
           element.style["width"] = "100%";
           element.style["height"] = "60px";
-          element.style["z-index"] = "999999999";
+          element.style["z-index"] = "999999998";
         }else{
           if(!customLocation){
             element.style["width"] = "100%";
@@ -98,7 +98,7 @@
       }
 
       var getTrebbleWidgetUrl = function(){
-        var trebbleId = (options.myTrebbleToEmbed && options.myTrebbleToEmbed != "chooseAnotherTrebbleToEmbed")?options.myTrebbleToEmbed : extractTrebbleIdFromUrl(options.trebbleId);
+        var trebbleId = getSelectedTrebbleId();
         if(trebbleId){
           var TREBBLE_EMBED_URL_PREFIX = "https://web.trebble.fm/trebble_embedded_optimized.html#p/l/t/";
           return TREBBLE_EMBED_URL_PREFIX + trebbleId +"/r/" + APP_CONTEXT;    
@@ -108,7 +108,7 @@
       }
 
       var isTrebbleWidgetUsingDemoURL = function(){
-        var trebbleId = (options.myTrebbleToEmbed && options.myTrebbleToEmbed != "chooseAnotherTrebbleToEmbed")?options.myTrebbleToEmbed : extractTrebbleIdFromUrl(options.trebbleId);
+        var trebbleId = getSelectedTrebbleId();
         if(trebbleId){
           return false;
         }else{
@@ -121,7 +121,8 @@
        createAppElement();
        if(element && width && height){
         window.INSTALL_SCOPE.currentTrebbleWidgetUrl =  trebbleEmbedUrl;
-        var iframe = document.createElement('iframe')
+        var demoBagdeElement = createDemoBagdeElment();
+        var iframe = document.createElement('iframe');
         iframe.style = 'max-width: 100%;'
         iframe.width = width
         iframe.height = height
@@ -129,11 +130,26 @@
         iframe.setAttribute('allowTransparency', '')
         iframe.setAttribute('allowfullscreen', '')
         iframe.src = trebbleEmbedUrl;
+        element.appendChild(demoBagdeElement);
         element.appendChild(iframe)
         window.INSTALL_SCOPE.trebbleWidgetIframe = element.children.length > 0 ? element.children[0]: null;
-        window.INSTALL_SCOPE.cloudflareContainerElement = element;
+        window.INSTALL_SCOPE.demoBagdeElement = demoBagdeElement;
       }
     };
+
+    function getSelectedTrebbleId(){
+      debugger;
+      return (options.myTrebbleToEmbed && options.myTrebbleToEmbed != "chooseAnotherTrebbleToEmbed")?options.myTrebbleToEmbed : extractTrebbleIdFromUrl(options.trebbleId);
+    }
+
+    function isSelectedTrebbleHasEnoughContentToBePlayed(trebbleId){
+      var trebbleId = getSelectedTrebbleId();
+      if(options.unplayableTrebbleUIDs && options.unplayableTrebbleUIDs.length > 0){
+        return options.unplayableTrebbleUIDs.indexOf(trebbleId) > -1;
+      }else{
+        return false;
+      }
+    }
 
     //Function to Update embedded trebble widget if the height, the width or the trebble id changes
     function setOptionsOnTrebbleWidget(nextOptions){
@@ -157,17 +173,67 @@
         createAndAddTrebbleWidgetToPage(newWidgetWidth, newWidgetHeight, newTrebbleEmbedUrl);
       }
       if(isUsingDemoTrebble){
-        window.INSTALL_SCOPE.cloudflareContainerElement.setAttribute("demoTrebble", "true");
+        window.INSTALL_SCOPE.demoBagdeElement.setAttribute("badgeState", "trebbledemo");
+        window.INSTALL_SCOPE.demoBagdeElement.innerHTML = "Demo Preview";
       }else{
-        window.INSTALL_SCOPE.cloudflareContainerElement.setAttribute("demoTrebble", "false");
+        if(isSelectedTrebbleHasEnoughContentToBePlayed()){
+          window.INSTALL_SCOPE.demoBagdeElement.setAttribute("badgeState", "notenoughcontent");
+          window.INSTALL_SCOPE.demoBagdeElement.innerHTML = "Not Enough Content To Play";
+        }else{
+          window.INSTALL_SCOPE.demoBagdeElement.setAttribute("badgeState", "none");
+          window.INSTALL_SCOPE.demoBagdeElement.innerHTML = null;
+        }
       }
 
     };
 
+    function createDemoBagdeElment(){
+      var badgeElement =  document.createElement("div");
+      badgeElement.className =  "demoBadge";
+      setupPopupListenerOnDemoBadgeElement(badgeElement)
+      return badgeElement;
+    }
+
+    function setupPopupListenerOnDemoBadgeElement(badgeElement){
+      if(badgeElement){
+        var getContentToDisplayInPopup = (function(){
+          var state = this.badgeElement.getAttribute("badgeState");
+          var popInfoElement =  document.createElement("div");
+          popInfoElement.className =  "trebblePopupInfo";
+          if(state == "trebbledemo"){
+            popInfoElement.innerHTML = "This embedded widget is a demo Trebble. Login with your Trebble.fm account to get a preview with your own Trebble. <br/> You don't have an account yet? Sign-up for one to start your Trebble radio.";
+            return popInfoElement;
+          }else{
+            if(state == "notenoughcontent"){
+              popInfoElement.innerHTML = "A Trebble needs to contain a minimum 10 songs to play. Please add songs or capsules for this Trebble to play.";
+              return popInfoElement;
+            }else{
+              return popInfoElement;
+            }
+            
+          }
+        }).bind({"badgeElement": badgeElement});
+        var popupPosition = "bottom left";
+        if(options.whereToAppend == "AfterThePage"){
+          popupPosition =  "top left";
+        }
+        var dropObj = new Drop({
+          target: badgeElement,
+          content: getContentToDisplayInPopup,
+          position: popupPosition,
+          constrainToScrollParent: false,
+          classes :"trebble-bagde-info drop-theme-arrows-bounce-dark",
+          openOn: 'hover'
+        });
+
+        badgeElement.dropInstance = dropObj;
+      }
+    }
+
 
     function addElement() {
       window.INSTALL_SCOPE.trebbleWidgetIframe  = null;
-      window.INSTALL_SCOPE.cloudflareContainerElement = null;
+      window.INSTALL_SCOPE.demoBagdeElement = null;
       window.INSTALL_SCOPE.currentTrebbleWidgetUrl = null;
       var trebbleEmbedUrl = getTrebbleWidgetUrl();
       var isUsingDemoTrebble = isTrebbleWidgetUsingDemoURL();
@@ -176,18 +242,25 @@
       if(!widgetWidth || !widgetHeight){
         return;
       }
-        
+
       createAndAddTrebbleWidgetToPage( widgetWidth, widgetHeight, trebbleEmbedUrl);
       window.INSTALL_SCOPE.setOptions  = setOptionsOnTrebbleWidget ;
-      if(isUsingDemoTrebble && window.INSTALL_SCOPE.cloudflareContainerElement){
-        window.INSTALL_SCOPE.cloudflareContainerElement.setAttribute("demoTrebble", "true");
+      if(isUsingDemoTrebble && window.INSTALL_SCOPE.demoBagdeElement){
+        window.INSTALL_SCOPE.demoBagdeElement.setAttribute("badgeState", "trebbledemo");
+        window.INSTALL_SCOPE.demoBagdeElement.innerHTML = "Demo Preview";
       }else{
-        window.INSTALL_SCOPE.cloudflareContainerElement.setAttribute("demoTrebble", "false");
+        if(isSelectedTrebbleHasEnoughContentToBePlayed()){
+          window.INSTALL_SCOPE.demoBagdeElement.setAttribute("badgeState", "notenoughcontent");
+          window.INSTALL_SCOPE.demoBagdeElement.innerHTML = "Not Enough Content To Play";
+        }else{
+          window.INSTALL_SCOPE.demoBagdeElement.setAttribute("badgeState", "none");
+          window.INSTALL_SCOPE.demoBagdeElement.innerHTML = null;
+        }
       }
 
     };
 
-  
+
 
     if(!inIframe() || isEmbeddedInCloudflareapps()){
       if (document.readyState == 'loading'){
