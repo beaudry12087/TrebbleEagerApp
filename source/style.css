@@ -110,3 +110,10 @@ cloudflare-app > div.demoBadge[badgeState=notenoughcontent]{
 		box-shadow: 0 0 0 0  rgba(209, 5, 131, 0);
 	}
 }
+
+
+.trebblePopupInfo a,
+.trebblePopupInfo a:hover,
+.trebblePopupInfo a:active{
+	border-bottom: 2px solid white;
+}
