@@ -44,7 +44,7 @@ cloudflare-app > div.demoBadge[badgeState=notenoughcontent]{
 }
 
 .trebblePopupInfo{
-	max-width: 240px;
+	max-width: 300px;
 	padding: 20px;
 }
 
@@ -69,7 +69,7 @@ cloudflare-app > div.demoBadge[badgeState=notenoughcontent]{
 }
 
 .trebble-bagde-info.drop-element.drop-theme-arrows-bounce-dark.drop-element-attached-top.drop-element-attached-left.drop-target-attached-bottom .drop-content:before{
-	border-bottom-color:  #0440e7;
+	border-bottom-color:  #474DE1;
 
 
 }

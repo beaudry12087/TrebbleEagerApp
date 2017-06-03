@@ -202,11 +202,11 @@
           var popInfoElement =  document.createElement("div");
           popInfoElement.className =  "trebblePopupInfo";
           if(state == "trebbledemo"){
-            popInfoElement.innerHTML = "This embedded widget is a demo Trebble. Login with your Trebble.fm account to get a preview with your own Trebble. <br/> You don't have an account yet? Sign-up for one to start your Trebble radio.";
+            popInfoElement.innerHTML = "This embedded widget is a demo Trebble. Click on the play button to learn more about Trebble.fm . Login with your Trebble.fm account to get a preview with your own Trebble. You don't have an account yet? Sign-up for one to start a Trebble radio.";
             return popInfoElement;
           }else{
             if(state == "notenoughcontent"){
-              popInfoElement.innerHTML = "A Trebble needs to contain a minimum 10 songs to play. Please add songs or capsules for this Trebble to play.";
+              popInfoElement.innerHTML = "A Trebble needs to contain a minimum 10 songs to play. Please visit Trebble.fm to add more songs or capsules to be able to play it.";
               return popInfoElement;
             }else{
               return popInfoElement;
@@ -269,5 +269,5 @@
     }else{
       addElement();
     }
-    
+
   })();
