@@ -116,4 +116,6 @@ cloudflare-app > div.demoBadge[badgeState=notenoughcontent]{
 .trebblePopupInfo a:hover,
 .trebblePopupInfo a:active{
 	border-bottom: 2px solid white;
+	color: white;
+	text-decoration: none;
 }
