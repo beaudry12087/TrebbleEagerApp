@@ -1,18 +1,13 @@
-cloudflare-app{
+cloudflare-app[app=trebble]{
 	position: relative;
 }
 
-cloudflare-app > div.demoBadge[badgeState=trebbledemo],
-cloudflare-app > div.demoBadge[badgeState=notenoughcontent]{
+cloudflare-app[app=trebble] > div.demoBadge[badge-state=trebbledemo],
+cloudflare-app[app=trebble] > div.demoBadge[badge-state=notenoughcontent]{
 	position: absolute;
 	top: 0px;
 	left: 0px;
 	background-color: #7062cf;
-	background:
-	-webkit-linear-gradient(45deg, hsla(298, 98%, 44%, 1) 0%, hsla(298, 98%, 44%, 0) 70%),
-	-webkit-linear-gradient(315deg, hsla(224, 97%, 46%, 1) 10%, hsla(224, 97%, 46%, 0) 80%),
-	-webkit-linear-gradient(225deg, hsla(217, 99%, 46%, 1) 10%, hsla(217, 99%, 46%, 0) 80%),
-	-webkit-linear-gradient(135deg, hsla(323, 95%, 42%, 1) 100%, hsla(323, 95%, 42%, 0) 70%);
 	background:
 	linear-gradient(45deg, hsla(298, 98%, 44%, 1) 0%, hsla(298, 98%, 44%, 0) 70%),
 	linear-gradient(135deg, hsla(224, 97%, 46%, 1) 10%, hsla(224, 97%, 46%, 0) 80%),
@@ -52,11 +47,6 @@ cloudflare-app > div.demoBadge[badgeState=notenoughcontent]{
 
 	border-radius: 0px;
 	background:
-	-webkit-linear-gradient(45deg, hsla(298, 98%, 44%, 1) 0%, hsla(298, 98%, 44%, 0) 70%),
-	-webkit-linear-gradient(315deg, hsla(224, 97%, 46%, 1) 10%, hsla(224, 97%, 46%, 0) 80%),
-	-webkit-linear-gradient(225deg, hsla(217, 99%, 46%, 1) 10%, hsla(217, 99%, 46%, 0) 80%),
-	-webkit-linear-gradient(135deg, hsla(323, 95%, 42%, 1) 100%, hsla(323, 95%, 42%, 0) 70%);
-	background:
 	linear-gradient(45deg, hsla(298, 98%, 44%, 1) 0%, hsla(298, 98%, 44%, 0) 70%),
 	linear-gradient(135deg, hsla(224, 97%, 46%, 1) 10%, hsla(224, 97%, 46%, 0) 80%),
 	linear-gradient(225deg, hsla(217, 99%, 46%, 1) 10%, hsla(217, 99%, 46%, 0) 80%),
@@ -76,10 +66,6 @@ cloudflare-app > div.demoBadge[badgeState=notenoughcontent]{
 
 .drop-element.drop-theme-arrows-bounce-dark .drop-content {
 
-	-webkit-transition: opacity cubic-bezier(0,0,.3,1) .25s,-webkit-transform cubic-bezier(0,0,.3,1) .25s;
-	-moz-transition: opacity cubic-bezier(0,0,.3,1) .25s,-moz-transform cubic-bezier(0,0,.3,1) .25s;
-	-o-transition: opacity cubic-bezier(0,0,.3,1) .25s,-o-transform cubic-bezier(0,0,.3,1) .25s;
-	-ms-transition: opacity cubic-bezier(0,0,.3,1) .25s,-ms-transform cubic-bezier(0,0,.3,1) .25s;
 	transition: opacity cubic-bezier(0,0,.3,1) .25s,transform cubic-bezier(0,0,.3,1) .25s;
 
 }
@@ -87,26 +73,23 @@ cloudflare-app > div.demoBadge[badgeState=notenoughcontent]{
 
 @-webkit-keyframes pinkpulse {
 	0% {
-		-webkit-box-shadow: 0 0 0 0 rgba(209, 5, 131, 0.4);
+		box-shadow: 0 0 0 0 rgba(209, 5, 131, 0.4);
 	}
 	70% {
-		-webkit-box-shadow: 0 0 0 15px rgba(209, 5, 131, 0.4);
+		box-shadow: 0 0 0 15px rgba(209, 5, 131, 0.4);
 	}
 	100% {
-		-webkit-box-shadow: 0 0 0 0  rgba(209, 5, 131, 0);
+		box-shadow: 0 0 0 0  rgba(209, 5, 131, 0);
 	}
 }
 @keyframes pinkpulse {
 	0% {
-		-moz-box-shadow: 0 0 0 0 rgba(209, 5, 131, 0.4);
 		box-shadow: 0 0 0 0 rgba(209, 5, 131, 0.4);
 	}
 	70% {
-		-moz-box-shadow: 0 0 0 15px  rgba(209, 5, 131, 0);
 		box-shadow: 0 0 0 15px  rgba(209, 5, 131, 0);
 	}
 	100% {
-		-moz-box-shadow: 0 0 0 0  rgba(209, 5, 131, 0);
 		box-shadow: 0 0 0 0  rgba(209, 5, 131, 0);
 	}
 }
@@ -118,4 +101,10 @@ cloudflare-app > div.demoBadge[badgeState=notenoughcontent]{
 	border-bottom: 2px solid white;
 	color: white;
 	text-decoration: none;
+}
+
+
+
+html.hidebodywhiletrebblesetup body{
+	display: none;
 }

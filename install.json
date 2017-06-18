@@ -11,11 +11,11 @@
          },
          {
             "type": "script",
-            "src": "./source/libs/tether.min.js"
+            "src": "./source/libs/tether.js"
          },
          {
             "type": "script",
-            "src": "./source/libs/drop.min.js"
+            "src": "./source/libs/drop.js"
          },
          {
             "type": "script",
@@ -60,7 +60,6 @@
       "properties": {
          "trebbleUserId": {
             "title": "Trebble Account",
-            "description": "Login or choose the user account who owns the Trebble you want to embed.",
             "type": "object",
             "format": "account",
             "order": 1,
@@ -72,6 +71,7 @@
             "title": "Trebble URL",
             "type": "string",
             "description": "The unique identifier of the Trebble to be embedded.",
+            "placeholder": "https://s.trebble.fm/p/p/t/01234567890123456789",
             "order": 3,
             "default": "",
             "showIf": {
@@ -83,7 +83,7 @@
          },
           "myTrebbleToEmbed": {
             "default": "chooseAnotherTrebbleToEmbed",
-            "title": "Trebble to embed",
+            "title": "Trebbles",
             "type": "string",
             "order": 2,
             "enum": [
@@ -95,12 +95,12 @@
             "showIf": {
                "trebbleUserId": {
                   "op": "!=",
-                  "value": null
+                  "value": ""
                }
             }
          },
          "widgetPlaceholderBackgroundColor":{
-           "default": "#333",
+           "default": "#ffffff",
            "format": "color",
            "title": "Widget placeholder background color",
            "type": "string"
@@ -109,7 +109,7 @@
             "default": "AfterThePage",
             "title": "Location",
             "type": "string",
-            "order": 3,
+            "order": 4,
             "enum": [
                "BeforeThePage",
                "AfterThePage",
@@ -142,7 +142,7 @@
             "type": "object",
             "format": "element",
             "description": "Select where on the page would you like the Trebble widget to appear.",
-            "order": 4,
+            "order": 6,
             "showIf": {
                "whereToAppend": "ChooseYourOwn"
             }
@@ -151,7 +151,7 @@
             "title": "Expand horizontally",
             "type": "boolean",
             "default": true,
-            "order": 5,
+            "order": 7,
             "showIf": {
                "whereToAppend": "ChooseYourOwn"
             }
@@ -161,7 +161,7 @@
             "type": "integer",
             "default": 300,
             "minimum": 200,
-            "order": 6,
+            "order": 8,
             "description": "Enter the width of the trebble widget in pixel.",
             "showIf": {
                "widthFitContainer": false,
@@ -172,7 +172,7 @@
             "title": "Expand vertically",
             "type": "boolean",
             "default": false,
-            "order": 7,
+            "order": 9,
             "showIf": {
                "whereToAppend": "ChooseYourOwn"
             }
@@ -182,7 +182,7 @@
             "type": "integer",
             "default": 400,
             "minimum": 150,
-            "order": 8,
+            "order": 10,
             "description": "Enter the height of the trebble widget in pixel.",
             "showIf": {
                "heightFitContainer": false,
