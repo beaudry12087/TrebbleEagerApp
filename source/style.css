@@ -102,9 +102,3 @@ cloudflare-app[app=trebble] > div.demoBadge[badge-state=notenoughcontent]{
 	color: white;
 	text-decoration: none;
 }
-
-
-
-html.hidebodywhiletrebblesetup body{
-	display: none;
-}

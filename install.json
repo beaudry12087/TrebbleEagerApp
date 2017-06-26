@@ -121,7 +121,7 @@
                "ChooseYourOwn": "Choose your own location ..."
             }
          },
-         "alwaysVisibible": {
+         "alwaysVisible": {
             "title": "Always Visible",
             "type": "boolean",
             "default": true,

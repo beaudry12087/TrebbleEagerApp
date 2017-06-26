@@ -47,9 +47,9 @@
         '<iframe id="loadedSite" width="100%" height="100%"  frameborder="0"    src="' + currentWebtsiteUrl + '" donotembedtrebblewidget="true" ></iframe>' +
         '</div>'
     document.body.style = 'width: 100%;height: 100%;position: absolute;display: block;'
-    window.onpopstate = function (event) {
+    window.addEventListener('popstate', function (event) {
       document.getElementById('loadedSite').contentWindow.history.go(-1)
-    }
+    })
     document.body.innerHTML = newBodyContentInnerHTML
     document.body.querySelector('#loadedSite').onload = function () {
       onTrebbleWebsiteIframeUrlChange()
@@ -66,7 +66,7 @@
       return
     }
     if (alwaysVisible) {
-      replaceBodyContentByCurrentWebsiteInAnIframe()
+      // replaceBodyContentByCurrentWebsiteInAnIframe()
     }
     var location = {selector: 'body'}
     if (options.whereToAppend === 'BeforeThePage') {
