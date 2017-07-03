@@ -127,9 +127,9 @@
     var trebbleId = getSelectedTrebbleId()
     if (trebbleId) {
       var TREBBLE_EMBED_URL_PREFIX = 'https://web.trebble.fm/trebble_embedded_optimized.html#p/l/t/'
-      return TREBBLE_EMBED_URL_PREFIX + trebbleId + '/r/' + APP_CONTEXT
+      return TREBBLE_EMBED_URL_PREFIX + trebbleId + '/ctk/' + APP_CONTEXT
     } else {
-      return 'https://web.trebble.fm/trebble_embedded_optimized.html#p/l/t/58ebe9a9227fe2000c015dc7/r/' + APP_CONTEXT
+      return 'https://web.trebble.fm/trebble_embedded_optimized.html#p/l/t/58ebe9a9227fe2000c015dc7/ctk/' + APP_CONTEXT
     }
   }
 
@@ -224,11 +224,11 @@
         var popInfoElement = document.createElement('div')
         popInfoElement.className = 'trebblePopupInfo'
         if (state === 'trebbledemo') {
-          popInfoElement.innerHTML = "This embedded widget is a demo Trebble. Click on the play button to learn more about Trebble.fm . Login with your Trebble.fm account to get a preview with your own Trebble. You don't have an account yet? Sign-up for one to start a Trebble radio."
+          popInfoElement.innerHTML = "&emsp;This embedded widget is a demo Trebble. Click on the play button to learn more about Trebble.fm .Login with your Trebble.fm account to get a preview with your own Trebble.<br/>&emsp;You don't have an account yet? Click on the \"Login or Register...\" button to sign-up for one and start your Trebble radio."
           return popInfoElement
         } else {
           if (state === 'notenoughcontent') {
-            popInfoElement.innerHTML = 'A Trebble needs to contain a minimum 10 songs to play. Please visit Trebble.fm to add more songs or capsules to be able to play it.'
+            popInfoElement.innerHTML = '&emsp;A Trebble needs to contain a minimum 10 songs to play. Please visit Trebble.fm to add more songs or capsules to be able to play it.'
             return popInfoElement
           } else {
             return popInfoElement
