@@ -24,7 +24,7 @@
       ]
    },
    "links" :[{
-                   "itle": "Trebble.fm",
+                   "title": "Trebble.fm",
                    "description": "Visit Trebble.fm to add music and capsules to your Trebble",
                    "href": "https://web.trebble.fm/#accessCode/M5LL-UPCB-B4E2"
     }],
@@ -44,7 +44,6 @@
          "handlers": [
             {
                "options": [
-                  "trebbleId",
                   "trebbleUserId",
                   "widthFitContainer",
                   "customWidth",
@@ -67,49 +66,19 @@
                "Trebble"
             ]
          },
-         "trebbleId": {
-            "title": "Trebble URL",
-            "type": "string",
-            "description": "The unique identifier of the Trebble to be embedded.",
-            "placeholder": "https://s.trebble.fm/p/p/t/01234567890123456789",
-            "order": 3,
-            "default": "",
-            "showIf": {
-               "myTrebbleToEmbed": {
-                  "op": "==",
-                  "value": "chooseAnotherTrebbleToEmbed"
-               }
-            }
-         },
-          "myTrebbleToEmbed": {
-            "default": "chooseAnotherTrebbleToEmbed",
-            "title": "Trebbles",
-            "type": "string",
-            "order": 2,
-            "enum": [
-                "chooseAnotherTrebbleToEmbed"
-            ],
-            "enumNames": {
-               "chooseAnotherTrebbleToEmbed":"Choose another Trebble to embed ..."
-            },
-            "showIf": {
-               "trebbleUserId": {
-                  "op": "!=",
-                  "value": ""
-               }
-            }
-         },
+
          "widgetPlaceholderBackgroundColor":{
            "default": "#ffffff",
            "format": "color",
            "title": "Widget placeholder background color",
-           "type": "string"
+           "type": "string",
+           "order": 2
          },
          "whereToAppend": {
             "default": "AfterThePage",
             "title": "Location",
             "type": "string",
-            "order": 4,
+            "order": 3,
             "enum": [
                "BeforeThePage",
                "AfterThePage",
@@ -125,7 +94,7 @@
             "title": "Always Visible",
             "type": "boolean",
             "default": true,
-            "order": 5,
+            "order": 4,
             "showIf": {
                "whereToAppend": {
                   "op": "!=",
@@ -142,7 +111,7 @@
             "type": "object",
             "format": "element",
             "description": "Select where on the page would you like the Trebble widget to appear.",
-            "order": 6,
+            "order": 5,
             "showIf": {
                "whereToAppend": "ChooseYourOwn"
             }
@@ -151,7 +120,7 @@
             "title": "Expand horizontally",
             "type": "boolean",
             "default": true,
-            "order": 7,
+            "order": 6,
             "showIf": {
                "whereToAppend": "ChooseYourOwn"
             }
@@ -161,7 +130,7 @@
             "type": "integer",
             "default": 300,
             "minimum": 200,
-            "order": 8,
+            "order": 7,
             "description": "Enter the width of the trebble widget in pixel.",
             "showIf": {
                "widthFitContainer": false,
@@ -172,7 +141,7 @@
             "title": "Expand vertically",
             "type": "boolean",
             "default": false,
-            "order": 9,
+            "order": 8,
             "showIf": {
                "whereToAppend": "ChooseYourOwn"
             }
@@ -182,7 +151,7 @@
             "type": "integer",
             "default": 400,
             "minimum": 150,
-            "order": 10,
+            "order": 9,
             "description": "Enter the height of the trebble widget in pixel.",
             "showIf": {
                "heightFitContainer": false,

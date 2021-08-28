@@ -3,7 +3,8 @@ cloudflare-app[app=trebble]{
 }
 
 cloudflare-app[app=trebble] > div.demoBadge[badge-state=trebbledemo],
-cloudflare-app[app=trebble] > div.demoBadge[badge-state=notenoughcontent]{
+cloudflare-app[app=trebble] > div.demoBadge[badge-state=notenoughcontent],
+cloudflare-app[app=trebble] > div.demoBadge[badge-state=nosubscription]{
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -28,6 +29,7 @@ cloudflare-app[app=trebble] > div.demoBadge[badge-state=notenoughcontent]{
 	-moz-align-items: center;
 	-ms-align-items: center;
 	font-size: 12px;
+	font-weight: 900;
 	padding: 0px 10px;
 	animation: pinkpulse 1.6s infinite;
 	-webkit-animation: pinkpulse 1.6s infinite;
@@ -40,12 +42,13 @@ cloudflare-app[app=trebble] > div.demoBadge[badge-state=notenoughcontent]{
 
 .trebblePopupInfo{
 	max-width: 300px;
-	padding: 20px;
+	padding: 10px;
 }
 
 .trebble-bagde-info.drop-theme-arrows-bounce-dark > .drop-content{
 
 	border-radius: 0px;
+	cursor: pointer;
 	background:
 	linear-gradient(45deg, hsla(298, 98%, 44%, 1) 0%, hsla(298, 98%, 44%, 0) 70%),
 	linear-gradient(135deg, hsla(224, 97%, 46%, 1) 10%, hsla(224, 97%, 46%, 0) 80%),
